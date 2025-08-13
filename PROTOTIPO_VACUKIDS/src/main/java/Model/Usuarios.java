@@ -5,8 +5,8 @@ public class Usuarios {
     private int idTipoUsuario;
     private String cedula_usuario;
     private String primerNombre;
-    private String segundoNombre;
     private String primerApellido;
+    private String segundoNombre;
     private String segundoApellido;
     private String correo;
     private String login;
@@ -16,19 +16,21 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Usuarios(int idTipoUsuario, String cedula_usuario, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correo, String login, String contrasena, boolean estado) {
+    public Usuarios(int idUser, int idTipoUsuario, String cedula_usuario, String primerNombre,
+                    String primerApellido, String segundoNombre, String segundoApellido, String correo,
+                    String login, String contrasena, boolean estado) {
+        this.idUser = idUser;
         this.idTipoUsuario = idTipoUsuario;
         this.cedula_usuario = cedula_usuario;
         this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
+        this.segundoNombre = segundoNombre;
         this.segundoApellido = segundoApellido;
         this.correo = correo;
         this.login = login;
         this.contrasena = contrasena;
         this.estado = estado;
     }
-
     public int getIdUser() {
         return idUser;
     }

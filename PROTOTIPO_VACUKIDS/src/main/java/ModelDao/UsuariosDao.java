@@ -43,12 +43,13 @@ public class UsuariosDao implements CrudUsuarios {
                 f.setIdTipoUsuario(rs.getInt(2));
                 f.setCedula_usuario(rs.getString(3));
                 f.setPrimerNombre(rs.getString(4));
-                f.setSegundoNombre(rs.getString(5));
-                f.setPrimerApellido(rs.getString(6));
+                f.setPrimerApellido(rs.getString(5));
+                f.setSegundoNombre(rs.getString(6));
                 f.setSegundoApellido(rs.getString(7));
-                f.setCorreo(rs.getString(8));
-                f.setLogin(rs.getString(9));
-                f.setEstado(rs.getBoolean(10));
+                f.setCorreo(rs.getString(9));
+                f.setLogin(rs.getString(10));
+                f.setContrasena(rs.getString(11));
+                f.setEstado(rs.getBoolean(12));
                 users.add(f);
             }
         } catch (Exception e) {
@@ -72,13 +73,13 @@ public class UsuariosDao implements CrudUsuarios {
                 f.setIdTipoUsuario(rs.getInt(2));
                 f.setCedula_usuario(rs.getString(3));
                 f.setPrimerNombre(rs.getString(4));
-                f.setSegundoNombre(rs.getString(5));
-                f.setPrimerApellido(rs.getString(6));
+                f.setPrimerApellido(rs.getString(5));
+                f.setSegundoNombre(rs.getString(6));
                 f.setSegundoApellido(rs.getString(7));
-                f.setCorreo(rs.getString(8));
-                f.setLogin(rs.getString(9));
-                f.setContrasena(rs.getString(10));
-                f.setEstado(rs.getBoolean(11));
+                f.setCorreo(rs.getString(9));
+                f.setLogin(rs.getString(10));
+                f.setContrasena(rs.getString(11));
+                f.setEstado(rs.getBoolean(12));
             }
         } catch (Exception e) {
             System.out.println("Error al listar por ID: " + e.getMessage());
@@ -96,8 +97,8 @@ public class UsuariosDao implements CrudUsuarios {
             ps.setInt(1, f.getIdTipoUsuario());
             ps.setString(2, f.getCedula_usuario());
             ps.setString(3, f.getPrimerNombre());
-            ps.setString(4, f.getSegundoNombre());
-            ps.setString(5, f.getPrimerApellido());
+            ps.setString(4, f.getPrimerApellido());
+            ps.setString(5, f.getSegundoNombre());
             ps.setString(6, f.getSegundoApellido());
             ps.setString(7, f.getCorreo());
             ps.setString(8, f.getLogin());
@@ -214,8 +215,8 @@ public class UsuariosDao implements CrudUsuarios {
                 usuario.setIdTipoUsuario(rs.getInt(2));
                 usuario.setCedula_usuario(rs.getString(3));
                 usuario.setPrimerNombre(rs.getString(4));
-                usuario.setSegundoNombre(rs.getString(5));
-                usuario.setPrimerApellido(rs.getString(6));
+                usuario.setPrimerApellido(rs.getString(5));
+                usuario.setSegundoNombre(rs.getString(6));
                 usuario.setSegundoApellido(rs.getString(7));
                 usuario.setCorreo(rs.getString(8));
                 usuario.setLogin(rs.getString(9));

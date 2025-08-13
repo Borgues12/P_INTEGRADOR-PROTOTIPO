@@ -18,7 +18,7 @@
     String nombreCompleto = (String) session.getAttribute("nombreCompleto");
 
     if (usuario == null) {
-        response.sendRedirect("Controlador?action=login");
+        response.sendRedirect("AuthController?action=login");
         return;
     }
 %>
