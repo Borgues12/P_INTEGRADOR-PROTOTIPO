@@ -1,0 +1,901 @@
+Index: PROTOTIPO_VACUKIDS/src/main/webapp/loginv.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\r\n<html lang=\"es\">\r\n<head>\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Login - MiSaludApp</title>\r\n\r\n    <!-- Fuente Poppins desde Google Fonts -->\r\n    <link rel=\"stylesheet\" href=\"css/Style.css\">\r\n    <link rel=\"stylesheet\" href=\"css/alert-styles.css\">\r\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css\">\r\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\r\n    <link href=\"https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap\" rel=\"stylesheet\">\r\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\r\n    <link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap\" rel=\"stylesheet\">\r\n</head>\r\n<body>\r\n\r\n<div class=\"layout\">\r\n    <!-- Mostrar errores -->\r\n    <% if (request.getAttribute(\"error\") != null) { %>\r\n    <div class=\"alert alert-danger\" role=\"alert\">\r\n        <i class=\"fas fa-exclamation-triangle\"></i>\r\n        <%= request.getAttribute(\"error\") %>\r\n    </div>\r\n    <% } %>\r\n\r\n    <!-- Mostrar mensajes -->\r\n    <% if (request.getAttribute(\"mensaje\") != null) { %>\r\n    <div class=\"alert alert-success\" role=\"alert\">\r\n        <i class=\"fas fa-check-circle\"></i>\r\n        <%= request.getAttribute(\"mensaje\") %>\r\n    </div>\r\n    <% } %>\r\n\r\n    <!-- Panel izquierdo con logo -->\r\n    <div class=\"layout__panel layout__panel--left\">\r\n        <div class=\"logo-enhanced\">\r\n            <img src=\"css/Imagenes/logo.png\" alt=\"VACUKIDS Logo\" class=\"logo-image\" width=\"200\" height=\"100\"><br><br>\r\n            <p style=\"font-family: 'Fredoka One'; font-size: 24px; color: #2196f3; margin-bottom: 0;\">\r\n                Cuidando tu salud<br>con amor y ciencia\r\n            </p>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"layout__panel layout__panel--right\">\r\n        <div class=\"brand-container\">\r\n            <div class=\"brand\">Vacunate CTM</div>\r\n        </div>\r\n\r\n        <div class=\"login__title\">Bienvenido/a</div>\r\n\r\n        <!-- FORMULARIO CORREGIDO: Agregado method=\"post\" y action=\"Controlador\" -->\r\n        <form class=\"form\" method=\"post\" action=\"Controlador\">\r\n            <input type=\"hidden\" name=\"action\" value=\"validar_login\">\r\n\r\n            <!-- Campo de usuario -->\r\n            <div class=\"form__group\">\r\n                <label class=\"form__label\" for=\"login\">Correo o Usuario</label>\r\n                <div class=\"form__input-wrapper\">\r\n                    <i class=\"fas fa-user form__icon\"></i>\r\n                    <input type=\"text\"\r\n                           class=\"form__input\"\r\n                           id=\"login\"\r\n                           name=\"login\"\r\n                           placeholder=\"Ingrese su usuario\"\r\n                           value=\"<%= request.getAttribute(\"login\") != null ? request.getAttribute(\"login\") : \"\" %>\"\r\n                           required>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Campo de contraseña -->\r\n            <div class=\"form__group\">\r\n                <label class=\"form__label\" for=\"password\">Contraseña</label>\r\n                <div class=\"form__input-wrapper\">\r\n                    <i class=\"fas fa-lock form__icon\"></i>\r\n                    <input type=\"password\"\r\n                           class=\"form__input\"\r\n                           id=\"password\"\r\n                           name=\"contrasena\"\r\n                           placeholder=\"Ingrese su contraseña\"\r\n                           required>\r\n                    <i class=\"far fa-eye form__toggle\" id=\"togglePassword\" title=\"Mostrar/Ocultar contraseña\"></i>\r\n                </div>\r\n            </div>\r\n\r\n            <button class=\"form__button\" type=\"submit\">Iniciar sesión</button>\r\n        </form>\r\n\r\n        <div class=\"actions\">\r\n            <!-- Botón \"Recordarme\" eliminado -->\r\n            <a href=\"Controlador?action=mostrar_verificar_correo\" class=\"actions__button\">¿Olvidaste tu contraseña?</a>\r\n        </div>\r\n\r\n        <div class=\"register\">\r\n            <p>¿No tienes cuenta?\r\n                <a href=\"Controlador?action=mostrar_registro\" class=\"register__link\">Regístrate aquí</a>\r\n            </p>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- JavaScript para funcionalidad de mostrar/ocultar contraseña -->\r\n<script>\r\n    document.addEventListener('DOMContentLoaded', function() {\r\n        const togglePassword = document.getElementById('togglePassword');\r\n        const passwordField = document.getElementById('password');\r\n\r\n        if (togglePassword && passwordField) {\r\n            togglePassword.addEventListener('click', function() {\r\n                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';\r\n                passwordField.setAttribute('type', type);\r\n                this.classList.toggle('fa-eye');\r\n                this.classList.toggle('fa-eye-slash');\r\n            });\r\n        }\r\n    });\r\n</script>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PROTOTIPO_VACUKIDS/src/main/webapp/loginv.jsp b/PROTOTIPO_VACUKIDS/src/main/webapp/loginv.jsp
+--- a/PROTOTIPO_VACUKIDS/src/main/webapp/loginv.jsp	(revision a6146586065b123aed0b2a9f6ab2f49b387e3e42)
++++ b/PROTOTIPO_VACUKIDS/src/main/webapp/loginv.jsp	(date 1754880080323)
+@@ -1,4 +1,6 @@
++
+ <%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+ <html lang="es">
+ <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@@ -50,9 +52,8 @@
+         <div class="login__title">Bienvenido/a</div>
+ 
+         <!-- FORMULARIO CORREGIDO: Agregado method="post" y action="Controlador" -->
+-        <form class="form" method="post" action="Controlador">
++        <form id="contactForm" class="form" action="Controlador" method="post">
+             <input type="hidden" name="action" value="validar_login">
+-
+             <!-- Campo de usuario -->
+             <div class="form__group">
+                 <label class="form__label" for="login">Correo o Usuario</label>
+@@ -83,11 +84,19 @@
+                 </div>
+             </div>
+ 
+-            <button class="form__button" type="submit">Iniciar sesión</button>
++            <div class="recaptcha">
++                <div class="g-recaptcha"
++                     data-sitekey="6LfhX6ArAAAAAHUhecxg6Jg0W2iMw-WAvh6FEU6x"
++                     data-callback="onRecaptchaSuccess"
++                     data-expired-callback="onRecaptchaExpired"></div>
++            </div>
++
++
++            <button class="form__button" type="submit" disabled>Iniciar sesión</button>
++            <div id="result" class="message" role="alert" aria-live="polite"></div>
+         </form>
+ 
+         <div class="actions">
+-            <!-- Botón "Recordarme" eliminado -->
+             <a href="Controlador?action=mostrar_verificar_correo" class="actions__button">¿Olvidaste tu contraseña?</a>
+         </div>
+ 
+@@ -115,6 +124,147 @@
+         }
+     });
+ </script>
++<script>
++    // ===== Helpers de mensajes (usa #result si existe; sino, alert) =====
++    let recaptchaCompleted = false; // 🆕 NUEVA VARIABLE
++    const form = document.getElementById('contactForm');
++    const loginInput = document.getElementById('login');
++    const passInput = document.getElementById('password');
++    const submitBtn = document.querySelector('button[type="submit"]');
++    c
++
++    // Helpers de mensajes
++    function showMessage(message, type = 'info') {
++        const resultDiv = document.getElementById('result');
++        if (resultDiv) {
++            resultDiv.className = `message ${type}`;
++            resultDiv.textContent = message;
++            resultDiv.style.display = 'block'; // 🆕 NUEVA LÍNEA
++        }
++    }
++
++    function hideMessage() {
++        const resultDiv = document.getElementById('result');
++        if (resultDiv) resultDiv.innerHTML = '';
++        resultDiv.style.display = 'none'; // 🆕 AGREGUÉ ESTO
++    }
++
++    window.onRecaptchaSuccess = function(token) {
++        console.log('✅ reCAPTCHA completado');
++        recaptchaCompleted = true; // 🆕 NUEVA LÍNEA
++        const submitBtn = document.querySelector('button[type="submit"]'); // 🆕 CAMBIÉ ESTO
++        if (submitBtn) submitBtn.disabled = false;
++        showMessage('reCAPTCHA verificado correctamente', 'success');
++        setTimeout(hideMessage, 2000);
++    };
++
++    window.onRecaptchaExpired = function() {
++        console.log('⏰ reCAPTCHA expirado');
++        if (submitBtn) submitBtn.disabled = true;
++        showMessage('reCAPTCHA expirado. Por favor, verifique nuevamente.', 'error');
++    };
++
++    form = document.getElementById('contactForm');
++    loginInput = document.getElementById('login');
++    passInput = document.getElementById('password');
++    submitBtn = document.querySelector('button[type="submit"]');
++    // ===== Esperar DOM listo =====
++    form.addEventListener('submit', async function(e) {
++        e.preventDefault();
++
++        // Validaciones
++        const loginVal = loginInput?.value.trim() || '';
++        const passVal = passInput?.value || '';
++
++        if (!loginVal || !passVal) {
++            showMessage('❌ Usuario y contraseña son obligatorios.', 'error');
++            return;
++        }
++
++        if (!recaptchaCompleted) { // 🆕 USO LA VARIABLE GLOBAL
++            showMessage('❌ Por favor complete el reCAPTCHA.', 'error');
++            return;
++        }
++
++        const recaptchaResponse = window.grecaptcha?.getResponse?.() || '';
++        if (!recaptchaResponse) {
++            showMessage('❌ Error con reCAPTCHA. Intente nuevamente.', 'error');
++            return;
++        }
++
++        // Deshabilitar botón y mostrar loading
++        if (submitBtn) {
++            submitBtn.disabled = true;
++            submitBtn.dataset.originalText = submitBtn.textContent;
++            submitBtn.textContent = 'Ingresando...';
++        }
++
++        try {
++            // Crear FormData - CORREGIDO: definir la variable
++            const formData = new FormData(form); // 🆕 DEFINÍ LA VARIABLE
++            formData.append('action', 'validar_login');
++            formData.append('login', loginVal);
++            formData.append('contrasena', passVal);
++            formData.append('g-recaptcha-response', recaptchaResponse);
++
++            // Enviar petición
++            const response = await fetch('Controlador', {
++                method: 'POST',
++                headers: {
++                    'Accept': 'application/json',
++                    'X-Requested-With': 'XMLHttpRequest'
++                },
++                body: formData // 🆕 AHORA SÍ ESTÁ DEFINIDA
++            });
++
++            if (!response.ok) {
++                throw new Error(`Error HTTP: ${response.status}`);
++            }
++
++            const result = await response.json();
++
++            if (result.success) {
++                showMessage('✅ ' + result.message, 'success');
++
++                // Redirigir después de un breve delay
++                setTimeout(() => {
++                    if (result.redirectUrl) {
++                        window.location.href = result.redirectUrl;
++                    } else {
++                        window.location.reload();
++                    }
++                }, 1000);
++
++            } else {
++                showMessage('❌ ' + result.message, 'error');
++                // Resetear reCAPTCHA
++                if (window.grecaptcha) {
++                    window.grecaptcha.reset();
++                    recaptchaCompleted = false; // 🆕 RESETEAR VARIABLE
++                }
++            }
++
++        } catch (error) {
++            console.error('Error en login:', error);
++            showMessage('❌ Error de conexión. Intente nuevamente.', 'error');
++
++            // Resetear reCAPTCHA
++            if (window.grecaptcha) {
++                window.grecaptcha.reset();
++                recaptchaCompleted = false;
++            }
++
++        } finally {
++            // Restaurar botón
++            if (submitBtn) {
++                submitBtn.disabled = !recaptchaCompleted; // 🆕 SOLO HABILITAR SI reCAPTCHA ESTÁ COMPLETO
++                if (submitBtn.dataset.originalText) {
++                    submitBtn.textContent = submitBtn.dataset.originalText;
++                }
++            }
++        }
++    });
++</script>
+ 
+ </body>
+ </html>
+\ No newline at end of file
+Index: PROTOTIPO_VACUKIDS/src/main/java/ModelDao/UsuariosDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ModelDao;\r\nimport java.math.BigInteger; //añadido\r\nimport Config.Conexion;\r\nimport Interfaces.CrudUsuarios;\r\nimport Model.Usuarios;\r\n\r\nimport java.security.Security;\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.ResultSet;\r\nimport java.security.MessageDigest;\r\nimport java.security.NoSuchAlgorithmException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Properties;\r\nimport javax.mail.*;\r\nimport javax.mail.internet.*;\r\nimport javax.net.ssl.HttpsURLConnection;\r\nimport javax.net.ssl.SSLContext;\r\nimport javax.net.ssl.TrustManager;\r\nimport javax.net.ssl.X509TrustManager;\r\nimport java.util.Random;\r\n\r\npublic class UsuariosDao implements CrudUsuarios {\r\n\r\n    Conexion cn = new Conexion();\r\n    Connection con;\r\n    PreparedStatement ps;\r\n    ResultSet rs;\r\n\r\n    @Override\r\n    public List listar() {\r\n        ArrayList<Usuarios> users = new ArrayList<Usuarios>();\r\n        String sql = \"SELECT * FROM usuarios\";\r\n\r\n        try{\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            rs = ps.executeQuery();\r\n            while(rs.next()){\r\n                Usuarios f = new Usuarios();\r\n                f.setIdUser(rs.getInt(1));\r\n                f.setIdTipoUsuario(rs.getInt(2));\r\n                f.setCedula_usuario(rs.getString(3));\r\n                f.setPrimerNombre(rs.getString(4));\r\n                f.setSegundoNombre(rs.getString(5));\r\n                f.setPrimerApellido(rs.getString(6));\r\n                f.setSegundoApellido(rs.getString(7));\r\n                f.setCorreo(rs.getString(8));\r\n                f.setLogin(rs.getString(9));\r\n                f.setEstado(rs.getBoolean(10));\r\n                users.add(f);\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al listar usuarios: \" + e.getMessage());\r\n        }\r\n        return users;\r\n    }\r\n\r\n    @Override\r\n    public Usuarios list(int idUser) {\r\n        String sql = \"SELECT * FROM usuarios WHERE ID_USUARIO = ?\";\r\n        Usuarios f = new Usuarios();\r\n\r\n        try{\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setInt(1, idUser); //añadido\r\n            rs = ps.executeQuery();\r\n            while (rs.next()) {\r\n                f.setIdUser(rs.getInt(1));\r\n                f.setIdTipoUsuario(rs.getInt(2));\r\n                f.setCedula_usuario(rs.getString(3));\r\n                f.setPrimerNombre(rs.getString(4));\r\n                f.setSegundoNombre(rs.getString(5));\r\n                f.setPrimerApellido(rs.getString(6));\r\n                f.setSegundoApellido(rs.getString(7));\r\n                f.setCorreo(rs.getString(8));\r\n                f.setLogin(rs.getString(9));\r\n                f.setContrasena(rs.getString(10));\r\n                f.setEstado(rs.getBoolean(11));\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al listar por ID: \" + e.getMessage());\r\n        }\r\n        return f;\r\n    }\r\n\r\n    @Override\r\n    public boolean add(Usuarios f) {\r\n        String sql = \"INSERT INTO usuarios (ID_TIPO_USUARIO, CEDULA_USUARIOS, P_NOMBRE, S_NOMBRE, P_APELLIDO, S_APELLIDO, CORREO_USUARIO, LOGIN, CLAVE, ESTADO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setInt(1, f.getIdTipoUsuario());\r\n            ps.setString(2, f.getCedula_usuario());\r\n            ps.setString(3, f.getPrimerNombre());\r\n            ps.setString(4, f.getSegundoNombre());\r\n            ps.setString(5, f.getPrimerApellido());\r\n            ps.setString(6, f.getSegundoApellido());\r\n            ps.setString(7, f.getCorreo());\r\n            ps.setString(8, f.getLogin());\r\n            ps.setString(9, encriptarMD5(f.getContrasena()));\r\n            ps.setBoolean(10, true); //Estado activo por defecto\r\n            ps.executeUpdate();\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al agregar usuario: \" + e.getMessage());\r\n        }\r\n        return true;\r\n    }\r\n\r\n    public int addAndGetId(Usuarios f) {\r\n        String sql = \"INSERT INTO usuarios (ID_TIPO_USUARIO, CEDULA_USUARIOS, P_NOMBRE, S_NOMBRE, P_APELLIDO, S_APELLIDO, CORREO_USUARIO, LOGIN, CLAVE, ESTADO, INTENTOS_FALLIDOS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);\r\n            ps.setInt(1, f.getIdTipoUsuario());\r\n            ps.setString(2, f.getCedula_usuario());\r\n            ps.setString(3, f.getPrimerNombre());\r\n            ps.setString(4, f.getSegundoNombre());\r\n            ps.setString(5, f.getPrimerApellido());\r\n            ps.setString(6, f.getSegundoApellido());\r\n            ps.setString(7, f.getCorreo());\r\n            ps.setString(8, f.getLogin());\r\n            ps.setString(9, encriptarMD5(f.getContrasena()));\r\n            ps.setBoolean(10, f.isEstado());\r\n            ps.executeUpdate();\r\n\r\n            ResultSet generatedKeys = ps.getGeneratedKeys();\r\n            if (generatedKeys.next()) {\r\n                return generatedKeys.getInt(1);\r\n            }\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al agregar usuario: \" + e.getMessage());\r\n        }\r\n        return 0;\r\n    }\r\n\r\n    @Override\r\n    public boolean edit(Usuarios f) {\r\n        String sql = \"UPDATE usuarios SET ID_TIPO_USUARIO = ?, CEDULA_USUARIOS = ?, P_NOMBRE = ?, S_NOMBRE = ?, P_APELLIDO = ?, S_APELLIDO = ?, CORREO_USUARIO = ?, LOGIN = ?, ESTADO = ? WHERE ID_USUARIO = ?\"+f.getIdUser();\r\n\r\n        try  {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setInt(1, f.getIdTipoUsuario());\r\n            ps.setString(2, f.getCedula_usuario());\r\n            ps.setString(3, f.getPrimerNombre());\r\n            ps.setString(4, f.getSegundoNombre());\r\n            ps.setString(5, f.getPrimerApellido());\r\n            ps.setString(6, f.getSegundoApellido());\r\n            ps.setString(7, f.getCorreo());\r\n            ps.setString(8, f.getLogin());\r\n            ps.setString(9, encriptarMD5(f.getContrasena()));\r\n            ps.setBoolean(10, f.isEstado());\r\n            ps.executeUpdate();\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al editar usuario: \" + e.getMessage());\r\n        }\r\n        return true;\r\n    }\r\n\r\n    @Override\r\n    public boolean delete(int idUser) {\r\n        String sql = \"DELETE FROM usuarios WHERE ID_USUARIO = ?\"+idUser;\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.executeUpdate();\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al eliminar usuario: \" + e.getMessage());\r\n        }\r\n        return false;\r\n    }\r\n    //AÑADIDO\r\n    private String encriptarMD5(String texto) {\r\n        try {\r\n            MessageDigest md = MessageDigest.getInstance(\"MD5\");\r\n            byte[] messageDigest = md.digest(texto.getBytes());\r\n            BigInteger no = new BigInteger(1, messageDigest);\r\n            String hashtext = no.toString(16);\r\n            while (hashtext.length() < 32) {\r\n                hashtext = \"0\" + hashtext;\r\n            }\r\n            return hashtext;\r\n        } catch (NoSuchAlgorithmException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n\r\n    //MODIFICADO PARA INTENTOS DE FALLO\r\n    public Usuarios validarUsuario(String login, String contrasena) {\r\n        String sql = \"SELECT * FROM usuarios WHERE LOGIN = ? AND CLAVE = ? AND ESTADO = true\";\r\n        Usuarios usuario = new Usuarios();\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, login);\r\n            ps.setString(2, encriptarMD5(contrasena));\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next()) {\r\n                // Usuario válido - resetear intentos fallidos\r\n                resetearIntentosFallidos(login);\r\n\r\n                usuario.setIdUser(rs.getInt(1));\r\n                usuario.setIdTipoUsuario(rs.getInt(2));\r\n                usuario.setCedula_usuario(rs.getString(3));\r\n                usuario.setPrimerNombre(rs.getString(4));\r\n                usuario.setSegundoNombre(rs.getString(5));\r\n                usuario.setPrimerApellido(rs.getString(6));\r\n                usuario.setSegundoApellido(rs.getString(7));\r\n                usuario.setCorreo(rs.getString(8));\r\n                usuario.setLogin(rs.getString(9));\r\n                usuario.setContrasena(rs.getString(10));\r\n                usuario.setEstado(rs.getBoolean(11));\r\n            }\r\n            // NO incrementar intentos aquí - se hace en el controlador\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al validar usuario: \" + e.getMessage());\r\n        }\r\n        return usuario;\r\n    }\r\n\r\n    public boolean existeUsuario(String login, String cedula_usuario, String correo) {\r\n        String sql = \"SELECT COUNT(*) FROM usuarios WHERE LOGIN = ? OR CEDULA_USUARIOS = ? OR CORREO_USUARIO = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, login);\r\n            ps.setString(2, cedula_usuario);\r\n            ps.setString(3, correo);\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next()) {\r\n                return rs.getInt(1) > 0;\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al verificar existencia de usuario: \" + e.getMessage());\r\n        }\r\n        return false;\r\n    }\r\n\r\n    //AÑADIDO\r\n    public String verificarDuplicacion(String login, String cedula, String correo) {\r\n        String mensaje = \"\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n\r\n            // Verificar login\r\n            String sqlLogin = \"SELECT COUNT(*) FROM usuarios WHERE LOGIN = ?\";\r\n            ps = con.prepareStatement(sqlLogin);\r\n            ps.setString(1, login);\r\n            rs = ps.executeQuery();\r\n            if (rs.next() && rs.getInt(1) > 0) {\r\n                mensaje += \"El nombre de usuario ya está en uso. \";\r\n            }\r\n\r\n            // Verificar cédula\r\n            String sqlCedula = \"SELECT COUNT(*) FROM usuarios WHERE CEDULA_USUARIOS = ?\";\r\n            ps = con.prepareStatement(sqlCedula);\r\n            ps.setString(1, cedula);\r\n            rs = ps.executeQuery();\r\n            if (rs.next() && rs.getInt(1) > 0) {\r\n                mensaje += \"La cédula ya está registrada. \";\r\n            }\r\n\r\n            // Verificar correo\r\n            String sqlCorreo = \"SELECT COUNT(*) FROM usuarios WHERE CORREO_USUARIO = ?\";\r\n            ps = con.prepareStatement(sqlCorreo);\r\n            ps.setString(1, correo);\r\n            rs = ps.executeQuery();\r\n            if (rs.next() && rs.getInt(1) > 0) {\r\n                mensaje += \"El correo electrónico ya está registrado. \";\r\n            }\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al verificar duplicación: \" + e.getMessage());\r\n            return \"Error al verificar datos\";\r\n        }\r\n\r\n        return mensaje.trim();\r\n    }\r\n\r\n\r\n    public boolean asociarUsuarioACentros(int idUser, List<Integer> idCentroSalud) {\r\n        String sql = \"INSERT INTO usuario_centrosalud (ID_USUARIO, ID_CENTRO_SALUD) VALUES (?, ?)\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            con.setAutoCommit(false);\r\n            ps = con.prepareStatement(sql);\r\n\r\n            for (Integer idCentro : idCentroSalud) {\r\n                ps.setInt(1, idUser);\r\n                ps.setInt(2, idCentro);\r\n                ps.addBatch();\r\n            }\r\n            ps.executeBatch();\r\n            con.commit();\r\n            return true;\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al asociar usuario a centros: \" + e.getMessage());\r\n            return false;\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Verificación de autenticidad de correo -->\r\n    public boolean verificarCorreoAutentico(String correo) {\r\n        String codigoVerificacion = generarCodigoVerificacion();\r\n\r\n        // Guardar código en base de datos temporalmente\r\n        if (guardarCodigoVerificacion(correo, codigoVerificacion)) {\r\n            return enviarCorreoVerificacion(correo, codigoVerificacion);\r\n        }\r\n        return false;\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Generar código de verificación -->\r\n    private String generarCodigoVerificacion() {\r\n        Random random = new Random();\r\n        int codigo = 100000 + random.nextInt(900000); // Código de 6 dígitos\r\n        return String.valueOf(codigo);\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Guardar código de verificación en BD -->\r\n    private boolean guardarCodigoVerificacion(String correo, String codigo) {\r\n        String sql = \"INSERT INTO codigos_verificacion (CORREO, CODIGO, FECHA_CREACION, USADO) VALUES (?, ?, NOW(), false) \" +\r\n                \"ON DUPLICATE KEY UPDATE CODIGO = ?, FECHA_CREACION = NOW(), USADO = false\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, correo);\r\n            ps.setString(2, codigo);\r\n            ps.setString(3, codigo);\r\n            ps.executeUpdate();\r\n            return true;\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al guardar código de verificación: \" + e.getMessage());\r\n            return false;\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Enviar correo de verificación -->\r\n    private boolean enviarCorreoVerificacion(String correo, String codigo) {\r\n        try {\r\n            // ===== [0] TRUSTMANAGER PERSONALIZADO PARA IGNORAR SSL ===== //\r\n            TrustManager[] trustAllCerts = new TrustManager[]{\r\n                    new X509TrustManager() {\r\n                        public java.security.cert.X509Certificate[] getAcceptedIssuers() { return null; }\r\n                        public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {}\r\n                        public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {}\r\n                    }\r\n            };\r\n\r\n            SSLContext sc = SSLContext.getInstance(\"TLSv1.2\");\r\n            sc.init(null, trustAllCerts, new java.security.SecureRandom());\r\n            javax.net.ssl.SSLSocketFactory sslSocketFactory = sc.getSocketFactory();\r\n\r\n            // ===== [1] CONFIGURACIÓN SEGURA PARA JAVA 8u202 ===== //\r\n            System.setProperty(\"jdk.tls.client.protocols\", \"TLSv1.2\");\r\n            System.setProperty(\"https.protocols\", \"TLSv1.2\");\r\n            Security.setProperty(\"crypto.policy\", \"unlimited\");\r\n\r\n            // ===== [2] PROPIEDADES SMTP ===== //\r\n            Properties props = new Properties();\r\n            props.put(\"mail.smtp.host\", \"smtp.gmail.com\");\r\n            props.put(\"mail.smtp.port\", \"587\");\r\n            props.put(\"mail.smtp.auth\", \"true\");\r\n            props.put(\"mail.smtp.starttls.enable\", \"true\");\r\n            props.put(\"mail.smtp.starttls.required\", \"true\");\r\n            props.put(\"mail.smtp.ssl.protocols\", \"TLSv1.2\");\r\n\r\n            // Inyectar socket factory que ignora validación SSL\r\n            props.put(\"mail.smtp.ssl.socketFactory\", sslSocketFactory);\r\n            props.put(\"mail.smtp.ssl.checkserveridentity\", \"false\");\r\n\r\n            // Timeouts\r\n            props.put(\"mail.smtp.connectiontimeout\", \"5000\");\r\n            props.put(\"mail.smtp.timeout\", \"5000\");\r\n            props.put(\"mail.smtp.writetimeout\", \"5000\");\r\n\r\n            // ===== [3] CREDENCIALES ===== //\r\n            String username = \"jampaex12@gmail.com\";\r\n            String password = \"vynp mdsh pelb gkdw\"; // ¡Usar variable de entorno en producción!\r\n\r\n            Session session = Session.getInstance(props, new Authenticator() {\r\n                @Override\r\n                protected PasswordAuthentication getPasswordAuthentication() {\r\n                    return new PasswordAuthentication(username, password);\r\n                }\r\n            });\r\n\r\n            session.setDebug(true); // Habilitar log en consola\r\n\r\n            // ===== [4] CONSTRUCCIÓN DEL MENSAJE ===== //\r\n            Message message = new MimeMessage(session);\r\n            message.setFrom(new InternetAddress(username));\r\n            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));\r\n            message.setSubject(\"Código de Verificación - VACUKIDS\");\r\n            message.setText(\"Su código es: \" + codigo + \"\\n\\nExpira en 15 minutos.\");\r\n\r\n            // ===== [5] ENVÍO DEL CORREO ===== //\r\n            Transport transport = session.getTransport(\"smtp\");\r\n            try {\r\n                transport.connect(\"smtp.gmail.com\", username, password);\r\n                transport.sendMessage(message, message.getAllRecipients());\r\n                return true;\r\n            } finally {\r\n                transport.close();\r\n            }\r\n\r\n        } catch (AuthenticationFailedException e) {\r\n            System.err.println(\"[ERROR] Credenciales incorrectas. Verifica la contraseña de aplicación.\");\r\n            e.printStackTrace();\r\n        } catch (MessagingException e) {\r\n            System.err.println(\"[ERROR SMTP] Detalles técnicos:\");\r\n            e.printStackTrace();\r\n        } catch (Exception e) {\r\n            System.err.println(\"[ERROR INESPERADO] \" + e.getMessage());\r\n        }\r\n        return false;\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Verificar código de verificación -->\r\n    public boolean verificarCodigoVerificacion(String correo, String codigo) {\r\n        String sql = \"SELECT COUNT(*) FROM codigos_verificacion WHERE CORREO = ? AND CODIGO = ? \" +\r\n                \"AND USADO = false AND FECHA_CREACION > DATE_SUB(NOW(), INTERVAL 15 MINUTE)\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, correo);\r\n            ps.setString(2, codigo);\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next() && rs.getInt(1) > 0) {\r\n                // Marcar código como usado\r\n                marcarCodigoComoUsado(correo, codigo);\r\n                return true;\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al verificar código: \" + e.getMessage());\r\n        }\r\n        return false;\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Marcar código como usado -->\r\n    private void marcarCodigoComoUsado(String correo, String codigo) {\r\n        String sql = \"UPDATE codigos_verificacion SET USADO = true WHERE CORREO = ? AND CODIGO = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, correo);\r\n            ps.setString(2, codigo);\r\n            ps.executeUpdate();\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al marcar código como usado: \" + e.getMessage());\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Incrementar intentos fallidos -->\r\n    public void incrementarIntentosFallidos(String login) {\r\n        String sql = \"UPDATE usuarios SET INTENTOS_FALLIDOS = INTENTOS_FALLIDOS + 1 WHERE LOGIN = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, login);\r\n            ps.executeUpdate();\r\n\r\n            // Verificar si debe bloquearse\r\n            verificarYBloquearUsuario(login);\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al incrementar intentos fallidos: \" + e.getMessage());\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Verificar y bloquear usuario después de 3 intentos -->\r\n    private void verificarYBloquearUsuario(String login) {\r\n        String sqlVerificar = \"SELECT INTENTOS_FALLIDOS FROM usuarios WHERE LOGIN = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sqlVerificar);\r\n            ps.setString(1, login);\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next() && rs.getInt(1) >= 3) {\r\n                // Bloquear usuario\r\n                String sqlBloquear = \"UPDATE usuarios SET ESTADO = false WHERE LOGIN = ?\";\r\n                ps = con.prepareStatement(sqlBloquear);\r\n                ps.setString(1, login);\r\n                ps.executeUpdate();\r\n\r\n                System.out.println(\"Usuario \" + login + \" bloqueado por exceder intentos fallidos\");\r\n            }\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al verificar y bloquear usuario: \" + e.getMessage());\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Resetear intentos fallidos -->\r\n    private void resetearIntentosFallidos(String login) {\r\n        String sql = \"UPDATE usuarios SET INTENTOS_FALLIDOS = 0 WHERE LOGIN = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, login);\r\n            ps.executeUpdate();\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al resetear intentos fallidos: \" + e.getMessage());\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Verificar si usuario está bloqueado -->\r\n    public boolean usuarioBloqueado(String login) {\r\n        String sql = \"SELECT ESTADO FROM usuarios WHERE LOGIN = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, login);\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next()) {\r\n                return !rs.getBoolean(1); // Si estado es false, está bloqueado\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al verificar bloqueo de usuario: \" + e.getMessage());\r\n        }\r\n        return false;\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Obtener intentos fallidos -->\r\n    public int obtenerIntentosFallidos(String login) {\r\n        String sql = \"SELECT INTENTOS_FALLIDOS FROM usuarios WHERE LOGIN = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, login);\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next()) {\r\n                return rs.getInt(1);\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al obtener intentos fallidos: \" + e.getMessage());\r\n        }\r\n        return 0;\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Desbloquear usuario (para administradores) -->\r\n    // <!-- MÉTODO NUEVO: Desbloquear usuario (para administradores) -->\r\n    public boolean desbloquearUsuario(String login) {\r\n        String sql = \"UPDATE usuarios SET ESTADO = true, INTENTOS_FALLIDOS = 0 WHERE LOGIN = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, login);\r\n            int filasAfectadas = ps.executeUpdate();\r\n            return filasAfectadas > 0;\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al desbloquear usuario: \" + e.getMessage());\r\n            return false;\r\n        } finally {\r\n            try {\r\n                if (ps != null) ps.close();\r\n                if (con != null) con.close();\r\n            } catch (Exception e) {\r\n                System.out.println(\"Error al cerrar recursos: \" + e.getMessage());\r\n            }\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Desbloquear contraseña -->\r\n    public boolean desbloquearContrasena(String login, String nuevaContrasena) {\r\n        String sql = \"UPDATE usuarios SET CLAVE = ?, ESTADO = true, INTENTOS_FALLIDOS = 0 WHERE LOGIN = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sql);\r\n            ps.setString(1, encriptarMD5(nuevaContrasena));\r\n            ps.setString(2, login);\r\n            int filasAfectadas = ps.executeUpdate();\r\n            return filasAfectadas > 0;\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al desbloquear contraseña: \" + e.getMessage());\r\n            return false;\r\n        } finally {\r\n            try {\r\n                if (ps != null) ps.close();\r\n                if (con != null) con.close();\r\n            } catch (Exception e) {\r\n                System.out.println(\"Error al cerrar recursos: \" + e.getMessage());\r\n            }\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Cambiar contraseña con verificación -->\r\n    public boolean cambiarContrasenaConVerificacion(String login, String contrasenaActual, String nuevaContrasena) {\r\n        String sqlVerificar = \"SELECT COUNT(*) FROM usuarios WHERE LOGIN = ? AND CLAVE = ?\";\r\n        String sqlActualizar = \"UPDATE usuarios SET CLAVE = ? WHERE LOGIN = ?\";\r\n\r\n        try {\r\n            con = cn.getCon();\r\n\r\n            // Verificar contraseña actual\r\n            ps = con.prepareStatement(sqlVerificar);\r\n            ps.setString(1, login);\r\n            ps.setString(2, encriptarMD5(contrasenaActual));\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next() && rs.getInt(1) > 0) {\r\n                // Actualizar contraseña\r\n                ps = con.prepareStatement(sqlActualizar);\r\n                ps.setString(1, encriptarMD5(nuevaContrasena));\r\n                ps.setString(2, login);\r\n                int filasAfectadas = ps.executeUpdate();\r\n                return filasAfectadas > 0;\r\n            }\r\n            return false;\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al cambiar contraseña: \" + e.getMessage());\r\n            return false;\r\n        } finally {\r\n            try {\r\n                if (rs != null) rs.close();\r\n                if (ps != null) ps.close();\r\n                if (con != null) con.close();\r\n            } catch (Exception e) {\r\n                System.out.println(\"Error al cerrar recursos: \" + e.getMessage());\r\n            }\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Recuperar contraseña por correo -->\r\n    public boolean recuperarContrasena(String correo) {\r\n        String sqlBuscar = \"SELECT LOGIN FROM usuarios WHERE CORREO_USUARIO = ?\";\r\n        String nuevaContrasena = generarContrasenaAleatoria();\r\n\r\n        try {\r\n            con = cn.getCon();\r\n            ps = con.prepareStatement(sqlBuscar);\r\n            ps.setString(1, correo);\r\n            rs = ps.executeQuery();\r\n\r\n            if (rs.next()) {\r\n                String login = rs.getString(1);\r\n\r\n                // Actualizar contraseña\r\n                if (desbloquearContrasena(login, nuevaContrasena)) {\r\n                    // Enviar nueva contraseña por correo\r\n                    return enviarNuevaContrasena(correo, nuevaContrasena);\r\n                }\r\n            }\r\n            return false;\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al recuperar contraseña: \" + e.getMessage());\r\n            return false;\r\n        } finally {\r\n            try {\r\n                if (rs != null) rs.close();\r\n                if (ps != null) ps.close();\r\n                if (con != null) con.close();\r\n            } catch (Exception e) {\r\n                System.out.println(\"Error al cerrar recursos: \" + e.getMessage());\r\n            }\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO AUXILIAR: Generar contraseña aleatoria -->\r\n    private String generarContrasenaAleatoria() {\r\n        String caracteres = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%\";\r\n        Random random = new Random();\r\n        StringBuilder contrasena = new StringBuilder();\r\n\r\n        for (int i = 0; i < 8; i++) {\r\n            contrasena.append(caracteres.charAt(random.nextInt(caracteres.length())));\r\n        }\r\n        return contrasena.toString();\r\n    }\r\n\r\n    // <!-- MÉTODO AUXILIAR: Enviar nueva contraseña por correo -->\r\n    private boolean enviarNuevaContrasena(String correo, String nuevaContrasena) {\r\n        try {\r\n            // Configuración similar al método enviarCorreoVerificacion\r\n            TrustManager[] trustAllCerts = new TrustManager[]{\r\n                    new X509TrustManager() {\r\n                        public java.security.cert.X509Certificate[] getAcceptedIssuers() { return null; }\r\n                        public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {}\r\n                        public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {}\r\n                    }\r\n            };\r\n\r\n            SSLContext sc = SSLContext.getInstance(\"TLSv1.2\");\r\n            sc.init(null, trustAllCerts, new java.security.SecureRandom());\r\n            javax.net.ssl.SSLSocketFactory sslSocketFactory = sc.getSocketFactory();\r\n\r\n            System.setProperty(\"jdk.tls.client.protocols\", \"TLSv1.2\");\r\n            System.setProperty(\"https.protocols\", \"TLSv1.2\");\r\n            Security.setProperty(\"crypto.policy\", \"unlimited\");\r\n\r\n            Properties props = new Properties();\r\n            props.put(\"mail.smtp.host\", \"smtp.gmail.com\");\r\n            props.put(\"mail.smtp.port\", \"587\");\r\n            props.put(\"mail.smtp.auth\", \"true\");\r\n            props.put(\"mail.smtp.starttls.enable\", \"true\");\r\n            props.put(\"mail.smtp.starttls.required\", \"true\");\r\n            props.put(\"mail.smtp.ssl.protocols\", \"TLSv1.2\");\r\n            props.put(\"mail.smtp.ssl.socketFactory\", sslSocketFactory);\r\n            props.put(\"mail.smtp.ssl.checkserveridentity\", \"false\");\r\n            props.put(\"mail.smtp.connectiontimeout\", \"5000\");\r\n            props.put(\"mail.smtp.timeout\", \"5000\");\r\n            props.put(\"mail.smtp.writetimeout\", \"5000\");\r\n\r\n            String username = \"jampaex12@gmail.com\";\r\n            String password = \"vynp mdsh pelb gkdw\";\r\n\r\n            Session session = Session.getInstance(props, new Authenticator() {\r\n                @Override\r\n                protected PasswordAuthentication getPasswordAuthentication() {\r\n                    return new PasswordAuthentication(username, password);\r\n                }\r\n            });\r\n\r\n            Message message = new MimeMessage(session);\r\n            message.setFrom(new InternetAddress(username));\r\n            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));\r\n            message.setSubject(\"Recuperación de Contraseña - VACUKIDS\");\r\n            message.setText(\"Su nueva contraseña temporal es: \" + nuevaContrasena +\r\n                    \"\\n\\nPor seguridad, le recomendamos cambiar esta contraseña después de iniciar sesión.\");\r\n\r\n            Transport transport = session.getTransport(\"smtp\");\r\n            try {\r\n                transport.connect(\"smtp.gmail.com\", username, password);\r\n                transport.sendMessage(message, message.getAllRecipients());\r\n                return true;\r\n            } finally {\r\n                transport.close();\r\n            }\r\n\r\n        } catch (Exception e) {\r\n            System.out.println(\"Error al enviar nueva contraseña: \" + e.getMessage());\r\n            return false;\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PROTOTIPO_VACUKIDS/src/main/java/ModelDao/UsuariosDao.java b/PROTOTIPO_VACUKIDS/src/main/java/ModelDao/UsuariosDao.java
+--- a/PROTOTIPO_VACUKIDS/src/main/java/ModelDao/UsuariosDao.java	(revision a6146586065b123aed0b2a9f6ab2f49b387e3e42)
++++ b/PROTOTIPO_VACUKIDS/src/main/java/ModelDao/UsuariosDao.java	(date 1754805415756)
+@@ -516,7 +516,7 @@
+     }
+ 
+     // <!-- MÉTODO NUEVO: Resetear intentos fallidos -->
+-    private void resetearIntentosFallidos(String login) {
++    public void resetearIntentosFallidos(String login) {
+         String sql = "UPDATE usuarios SET INTENTOS_FALLIDOS = 0 WHERE LOGIN = ?";
+ 
+         try {
+Index: PROTOTIPO_VACUKIDS/src/main/java/Controller/Controlador.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controller;\r\n\r\nimport Model.Usuarios;\r\nimport Model.Tipo_usuario;\r\nimport Model.Centro_salud;\r\nimport ModelDao.UsuariosDao;\r\nimport ModelDao.Tipo_usuarioDao;\r\nimport ModelDao.CentroSaludDao;\r\n\r\nimport javax.servlet.RequestDispatcher;\r\nimport javax.servlet.ServletException;\r\nimport javax.servlet.annotation.WebServlet;\r\nimport javax.servlet.http.HttpServlet;\r\nimport javax.servlet.http.HttpServletRequest;\r\nimport javax.servlet.http.HttpServletResponse;\r\nimport javax.servlet.http.HttpSession;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n@WebServlet(name = \"Controlador\", urlPatterns = {\"/Controlador\"})\r\npublic class Controlador extends HttpServlet {\r\n\r\n    String acceso = \"\";\r\n    String listar_centros = \"centro_salud/listar_centros.jsp\";\r\n    String login = \"loginv.jsp\";\r\n    String registro = \"registro.jsp\";\r\n    String dashboard = \"dashboard.jsp\";\r\n    String dashboard_administrador = \"administrador.jsp\";\r\n    String dashboard_usuario = \"padre_familia.jsp\";\r\n    String dashboard_personal_salud = \"medico.jsp\";\r\n    String verificar_correo = \"verificar_correo.jsp\";\r\n    String cambiar_contrasena = \"cambiar_contrasena.jsp\";\r\n    // <!-- NUEVA PÁGINA -->\r\n\r\n    // DAOs\r\n    UsuariosDao usuariosDao = new UsuariosDao();\r\n    Tipo_usuarioDao tipoUsuarioDao = new Tipo_usuarioDao();\r\n    CentroSaludDao centroSaludDao = new CentroSaludDao();\r\n\r\n    @Override\r\n    protected void doGet(HttpServletRequest request, HttpServletResponse response)\r\n            throws ServletException, IOException {\r\n\r\n        String action = request.getParameter(\"action\");\r\n\r\n        if (action == null) {\r\n            acceso = login;\r\n        } else {\r\n            switch (action) {\r\n                case \"login\":\r\n                    acceso = login;\r\n                    break;\r\n\r\n                case \"mostrar_registro\":\r\n                    // Cargar listas para los selects\r\n                    List<Tipo_usuario> tiposUsuario = tipoUsuarioDao.listar();\r\n                    List<Centro_salud> centrosSalud = centroSaludDao.listar();\r\n\r\n                    request.setAttribute(\"tiposUsuario\", tiposUsuario);\r\n                    request.setAttribute(\"centrosSalud\", centrosSalud);\r\n                    acceso = registro;\r\n                    break;\r\n\r\n                // CRUD Centros de Salud\r\n                case \"listar_centros_admin\":\r\n                    HttpSession sessionListarCentros = request.getSession(false);\r\n                    if (sessionListarCentros == null || sessionListarCentros.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    List<Centro_salud> centros = centroSaludDao.listar();\r\n                    request.setAttribute(\"centros\", centros);\r\n                    request.setAttribute(\"accion\", \"listar_centros\");\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n                case \"buscar_centro\":\r\n                    HttpSession sessionBuscarCentro = request.getSession(false);\r\n                    if (sessionBuscarCentro == null || sessionBuscarCentro.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    String idCentroStr = request.getParameter(\"id\");\r\n                    if (idCentroStr != null && !idCentroStr.trim().isEmpty()) {\r\n                        try {\r\n                            int idCentro = Integer.parseInt(idCentroStr);\r\n                            Centro_salud centro = centroSaludDao.list(idCentro);\r\n                            if (centro.getIdCentroSalud() > 0) {\r\n                                List<Centro_salud> centroEncontrado = new ArrayList<>();\r\n                                centroEncontrado.add(centro);\r\n                                request.setAttribute(\"centros\", centroEncontrado);\r\n                                request.setAttribute(\"mensaje\", \"Centro encontrado\");\r\n                            } else {\r\n                                request.setAttribute(\"error\", \"Centro no encontrado\");\r\n                                request.setAttribute(\"centros\", new ArrayList<>());\r\n                            }\r\n                        } catch (NumberFormatException e) {\r\n                            request.setAttribute(\"error\", \"ID inválido\");\r\n                            request.setAttribute(\"centros\", new ArrayList<>());\r\n                        }\r\n                    } else {\r\n                        List<Centro_salud> todosCentros = centroSaludDao.listar();\r\n                        request.setAttribute(\"centros\", todosCentros);\r\n                    }\r\n                    request.setAttribute(\"accion\", \"listar_centros\");\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n                case \"editar_centro\":\r\n                    HttpSession sessionEditarCentro = request.getSession(false);\r\n                    if (sessionEditarCentro == null || sessionEditarCentro.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    String idEditarStr = request.getParameter(\"id\");\r\n                    if (idEditarStr != null) {\r\n                        int idEditar = Integer.parseInt(idEditarStr);\r\n                        Centro_salud centroEditar = centroSaludDao.list(idEditar);\r\n                        request.setAttribute(\"centroEditar\", centroEditar);\r\n                    }\r\n                    List<Centro_salud> centrosEditar = centroSaludDao.listar();\r\n                    request.setAttribute(\"centros\", centrosEditar);\r\n                    request.setAttribute(\"accion\", \"listar_centros\");\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n// CRUD Usuarios\r\n                case \"listar_usuarios_admin\":\r\n                    HttpSession sessionListarUsuarios = request.getSession(false);\r\n                    if (sessionListarUsuarios == null || sessionListarUsuarios.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    List<Usuarios> usuarios = usuariosDao.listar();\r\n                    request.setAttribute(\"usuarios\", usuarios);\r\n                    request.setAttribute(\"accion\", \"listar_usuarios\");\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n// CRUD Tipos de Usuario\r\n                case \"listar_tipos_usuario_admin\":\r\n                    HttpSession sessionListarTipos = request.getSession(false);\r\n                    if (sessionListarTipos == null || sessionListarTipos.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    List<Tipo_usuario> tp = tipoUsuarioDao.listar();\r\n                    request.setAttribute(\"tiposUsuario\", tp);\r\n                    request.setAttribute(\"accion\", \"listar_tipos_usuario\");\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n                case \"listar_centros\":\r\n                    acceso = listar_centros;\r\n                    break;\r\n                case \"cambiar_contrasena\":\r\n                    acceso = cambiar_contrasena;\r\n                    break;\r\n\r\n                case \"logout\":\r\n                    HttpSession sessionLogout = request.getSession(false);\r\n                    if (sessionLogout != null) {\r\n                        sessionLogout.invalidate();\r\n                    }\r\n                    response.sendRedirect(\"Controlador?action=login\");\r\n                    return;\r\n\r\n                case \"dashboard\":\r\n                    HttpSession sessionDashboard = request.getSession(false);\r\n                    if (sessionDashboard == null || sessionDashboard.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    acceso = dashboard;\r\n                    break;\r\n\r\n                case \"dashboard_administrador\":\r\n                    HttpSession sessionAdmin = request.getSession(false);\r\n                    if (sessionAdmin == null || sessionAdmin.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n                case \"dashboard_usuario\":\r\n                    HttpSession sessionUsuario = request.getSession(false);\r\n                    if (sessionUsuario == null || sessionUsuario.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    acceso = dashboard_usuario;\r\n                    break;\r\n\r\n                case \"dashboard_personal_salud\":\r\n                    HttpSession sessionMedico = request.getSession(false);\r\n                    if (sessionMedico == null || sessionMedico.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    acceso = dashboard_personal_salud;\r\n                    break;\r\n\r\n                // <!-- NUEVA ACCIÓN: Mostrar página de verificación de correo -->\r\n                case \"mostrar_verificar_correo\":\r\n                    acceso = verificar_correo;\r\n                    break;\r\n\r\n                // <!-- NUEVA ACCIÓN: Desbloquear usuario (solo administradores) -->\r\n                case \"desbloquear_usuario\":\r\n                    desbloquearUsuario(request, response);\r\n                    return;\r\n\r\n                default:\r\n                    acceso = login;\r\n                    break;\r\n            }\r\n        }\r\n        RequestDispatcher vista = request.getRequestDispatcher(acceso);\r\n        vista.forward(request, response);\r\n    }\r\n\r\n    @Override\r\n    protected void doPost(HttpServletRequest request, HttpServletResponse response)\r\n            throws ServletException, IOException {\r\n        String action = request.getParameter(\"action\");\r\n\r\n        if (action == null) {\r\n            acceso = login;\r\n        } else {\r\n            switch (action) {\r\n                case \"validar_login\":\r\n                    validarLogin(request, response);\r\n                    break;\r\n\r\n                case \"registrar_usuario\":\r\n                    registrarUsuario(request, response);\r\n                    break;\r\n\r\n                // <!-- NUEVA ACCIÓN: Verificar correo electrónico -->\r\n                case \"verificar_correo\":\r\n                    verificarCorreo(request, response);\r\n                    break;\r\n\r\n                // <!-- NUEVA ACCIÓN: Confirmar código de verificación -->\r\n                case \"confirmar_codigo\":\r\n                    confirmarCodigoVerificacion(request, response);\r\n                    break;\r\n\r\n                // <!-- NUEVA ACCIÓN: Cambiar contraseña -->\r\n\r\n                case \"crear_centro\":\r\n                    HttpSession sessionCrearCentro = request.getSession(false);\r\n                    if (sessionCrearCentro == null || sessionCrearCentro.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    try {\r\n                        String nombre = request.getParameter(\"nombre\");\r\n                        String latitudStr = request.getParameter(\"latitud\");\r\n                        String longitudStr = request.getParameter(\"longitud\");\r\n\r\n                        if (nombre == null || nombre.trim().isEmpty()) {\r\n                            throw new Exception(\"El nombre es obligatorio\");\r\n                        }\r\n\r\n                        double latitud = Double.parseDouble(latitudStr);\r\n                        double longitud = Double.parseDouble(longitudStr);\r\n\r\n                        Centro_salud nuevoCentro = new Centro_salud();\r\n                        nuevoCentro.setNombreCentroSalud(nombre);\r\n                        nuevoCentro.setLatitud(latitud);\r\n                        nuevoCentro.setLongitud(longitud);\r\n\r\n                        if (centroSaludDao.add(nuevoCentro)) {\r\n                            request.setAttribute(\"exito\", \"Centro creado exitosamente\");\r\n                        } else {\r\n                            request.setAttribute(\"error\", \"Error al crear el centro\");\r\n                        }\r\n                    } catch (Exception e) {\r\n                        request.setAttribute(\"error\", \"Error: \" + e.getMessage());\r\n                    }\r\n\r\n                    List<Centro_salud> centrosCrear = centroSaludDao.listar();\r\n                    request.setAttribute(\"centros\", centrosCrear);\r\n                    request.setAttribute(\"accion\", \"listar_centros\");\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n                case \"actualizar_centro\":\r\n                    HttpSession sessionActualizarCentro = request.getSession(false);\r\n                    if (sessionActualizarCentro == null || sessionActualizarCentro.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    try {\r\n                        int id = Integer.parseInt(request.getParameter(\"id\"));\r\n                        String nombre = request.getParameter(\"nombre\");\r\n                        double latitud = Double.parseDouble(request.getParameter(\"latitud\"));\r\n                        double longitud = Double.parseDouble(request.getParameter(\"longitud\"));\r\n\r\n                        Centro_salud centroActualizar = new Centro_salud();\r\n                        centroActualizar.setIdCentroSalud(id);\r\n                        centroActualizar.setNombreCentroSalud(nombre);\r\n                        centroActualizar.setLatitud(latitud);\r\n                        centroActualizar.setLongitud(longitud);\r\n\r\n                        if (centroSaludDao.edit(centroActualizar)) {\r\n                            request.setAttribute(\"exito\", \"Centro actualizado exitosamente\");\r\n                        } else {\r\n                            request.setAttribute(\"error\", \"Error al actualizar el centro\");\r\n                        }\r\n                    } catch (Exception e) {\r\n                        request.setAttribute(\"error\", \"Error: \" + e.getMessage());\r\n                    }\r\n\r\n                    List<Centro_salud> centrosActualizar = centroSaludDao.listar();\r\n                    request.setAttribute(\"centros\", centrosActualizar);\r\n                    request.setAttribute(\"accion\", \"listar_centros\");\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n                case \"eliminar_centro\":\r\n                    HttpSession sessionEliminarCentro = request.getSession(false);\r\n                    if (sessionEliminarCentro == null || sessionEliminarCentro.getAttribute(\"usuario\") == null) {\r\n                        response.sendRedirect(\"Controlador?action=login\");\r\n                        return;\r\n                    }\r\n                    try {\r\n                        int idEliminar = Integer.parseInt(request.getParameter(\"id\"));\r\n                        if (centroSaludDao.delete(idEliminar)) {\r\n                            request.setAttribute(\"exito\", \"Centro eliminado exitosamente\");\r\n                        } else {\r\n                            request.setAttribute(\"error\", \"Error al eliminar el centro\");\r\n                        }\r\n                    } catch (Exception e) {\r\n                        request.setAttribute(\"error\", \"Error: \" + e.getMessage());\r\n                    }\r\n\r\n                    List<Centro_salud> centrosEliminar = centroSaludDao.listar();\r\n                    request.setAttribute(\"centros\", centrosEliminar);\r\n                    request.setAttribute(\"accion\", \"listar_centros\");\r\n                    acceso = dashboard_administrador;\r\n                    break;\r\n\r\n                default:\r\n                    acceso = login;\r\n                    break;\r\n            }\r\n        }\r\n\r\n        if (!response.isCommitted()) {\r\n            RequestDispatcher vista = request.getRequestDispatcher(acceso);\r\n            vista.forward(request, response);\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO MEJORADO: Validación de login con control de bloqueos -->\r\n    private void validarLogin(HttpServletRequest request, HttpServletResponse response)\r\n            throws ServletException, IOException {\r\n\r\n        String login = request.getParameter(\"login\");\r\n        String contrasena = request.getParameter(\"contrasena\");\r\n\r\n        if (login == null || login.trim().isEmpty() ||\r\n                contrasena == null || contrasena.trim().isEmpty()) {\r\n            request.setAttribute(\"error\", \"Por favor complete todos los campos\");\r\n            request.setAttribute(\"login\", login);\r\n            acceso = this.login;\r\n            return;\r\n        }\r\n\r\n        // Verificar si el usuario está bloqueado\r\n        if (usuariosDao.usuarioBloqueado(login)) {\r\n            request.setAttribute(\"error\", \"Su cuenta ha sido bloqueada por múltiples intentos fallidos. Contacte al administrador.\");\r\n            request.setAttribute(\"login\", login);\r\n            acceso = this.login;\r\n            return;\r\n        }\r\n\r\n        // Obtener intentos fallidos actuales\r\n        int intentosFallidos = usuariosDao.obtenerIntentosFallidos(login);\r\n\r\n        Usuarios usuario = usuariosDao.validarUsuario(login, contrasena);\r\n\r\n        if (usuario != null && usuario.getIdUser() > 0) {\r\n            // Login exitoso\r\n            HttpSession session = request.getSession(true);\r\n            session.setAttribute(\"usuario\", usuario);\r\n\r\n            // Crear nombre completo\r\n            String nombreCompleto = usuario.getPrimerNombre();\r\n            if (usuario.getSegundoNombre() != null && !usuario.getSegundoNombre().isEmpty()) {\r\n                nombreCompleto += \" \" + usuario.getSegundoNombre();\r\n            }\r\n            nombreCompleto += \" \" + usuario.getPrimerApellido();\r\n            if (usuario.getSegundoApellido() != null && !usuario.getSegundoApellido().isEmpty()) {\r\n                nombreCompleto += \" \" + usuario.getSegundoApellido();\r\n            }\r\n\r\n            session.setAttribute(\"nombreCompleto\", nombreCompleto);\r\n            int tipoUsuario = usuario.getIdTipoUsuario();\r\n            String redirectUrl = \"\";\r\n\r\n            switch (tipoUsuario) {\r\n                case 1: // Administrador\r\n                    redirectUrl = \"Controlador?action=dashboard_administrador\";\r\n                    break;\r\n                case 2: // Usuario (Padre de familia)\r\n                    redirectUrl = \"Controlador?action=dashboard_usuario\";\r\n                    break;\r\n                case 3: // Personal de Salud (Médico)\r\n                    redirectUrl = \"Controlador?action=dashboard_personal_salud\";\r\n                    break;\r\n                default:\r\n                    redirectUrl = \"Controlador?action=dashboard_usuario\";\r\n                    break;\r\n            }\r\n\r\n            response.sendRedirect(redirectUrl);\r\n        } else {\r\n            // Credenciales incorrectas - AQUÍ incrementamos los intentos\r\n            usuariosDao.incrementarIntentosFallidos(login);\r\n\r\n            // Obtener los nuevos intentos después del incremento\r\n            int nuevosIntentos = usuariosDao.obtenerIntentosFallidos(login);\r\n            String mensaje = \"Usuario o contraseña incorrectos\";\r\n\r\n            if (nuevosIntentos >= 3) {\r\n                mensaje += \". Su cuenta ha sido bloqueada por seguridad.\";\r\n            } else {\r\n                int intentosRestantes = 3 - nuevosIntentos;\r\n                mensaje += \". Le quedan \" + intentosRestantes + \" intento(s) antes de que su cuenta sea bloqueada.\";\r\n            }\r\n\r\n            request.setAttribute(\"error\", mensaje);\r\n            request.setAttribute(\"login\", login);\r\n            acceso = this.login;\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO MEJORADO: Registro de usuario con verificación mejorada -->\r\n    private void registrarUsuario(HttpServletRequest request, HttpServletResponse response)\r\n            throws ServletException, IOException {\r\n\r\n        try {\r\n            // Obtener parámetros\r\n            String cedula = request.getParameter(\"cedula\");\r\n            String correo = request.getParameter(\"correo\");\r\n            String primerNombre = request.getParameter(\"primerNombre\");\r\n            String segundoNombre = request.getParameter(\"segundoNombre\");\r\n            String primerApellido = request.getParameter(\"primerApellido\");\r\n            String segundoApellido = request.getParameter(\"segundoApellido\");\r\n            String tipoUsuario = request.getParameter(\"tipoUsuario\");\r\n            String[] centrosSalud = request.getParameterValues(\"centroSalud\");\r\n            String login = request.getParameter(\"login\");\r\n            String contrasena = request.getParameter(\"contrasena\");\r\n            String confirmarContrasena = request.getParameter(\"confirmarContrasena\");\r\n\r\n            // Validaciones básicas\r\n            if (!contrasena.equals(confirmarContrasena)) {\r\n                throw new Exception(\"Las contraseñas no coinciden\");\r\n            }\r\n\r\n            if (contrasena.length() < 6) {\r\n                throw new Exception(\"La contraseña debe tener al menos 6 caracteres\");\r\n            }\r\n\r\n            if (login.length() < 4) {\r\n                throw new Exception(\"El nombre de usuario debe tener al menos 4 caracteres\");\r\n            }\r\n\r\n            // Verificación mejorada de duplicación\r\n            String mensajeDuplicacion = usuariosDao.verificarDuplicacion(login, cedula, correo);\r\n            if (!mensajeDuplicacion.isEmpty()) {\r\n                throw new Exception(mensajeDuplicacion);\r\n            }\r\n\r\n            // Crear objeto usuario\r\n            Usuarios nuevoUsuario = new Usuarios();\r\n            nuevoUsuario.setCedula_usuario(cedula);\r\n            nuevoUsuario.setCorreo(correo);\r\n            nuevoUsuario.setPrimerNombre(primerNombre);\r\n            nuevoUsuario.setSegundoNombre(segundoNombre);\r\n            nuevoUsuario.setPrimerApellido(primerApellido);\r\n            nuevoUsuario.setSegundoApellido(segundoApellido);\r\n            nuevoUsuario.setIdTipoUsuario(Integer.parseInt(tipoUsuario));\r\n            nuevoUsuario.setLogin(login);\r\n            nuevoUsuario.setContrasena(contrasena);\r\n\r\n            // Registrar usuario y obtener su ID\r\n            int idUsuarioCreado = usuariosDao.addAndGetId(nuevoUsuario);\r\n\r\n            if (idUsuarioCreado > 0) {\r\n                // Convertir array a lista\r\n                List<Integer> listaCentros = new ArrayList<>();\r\n                for (String centroId : centrosSalud) {\r\n                    listaCentros.add(Integer.parseInt(centroId));\r\n                }\r\n\r\n                // Asociar usuario a centros\r\n                boolean asociado = usuariosDao.asociarUsuarioACentros(idUsuarioCreado, listaCentros);\r\n\r\n                if (asociado) {\r\n                    request.setAttribute(\"exito\", \"Usuario registrado exitosamente. Puede iniciar sesión.\");\r\n                    acceso = this.login;\r\n                } else {\r\n                    throw new Exception(\"Error al asociar centros de salud\");\r\n                }\r\n            } else {\r\n                throw new Exception(\"Error al registrar el usuario\");\r\n            }\r\n\r\n        } catch (Exception e) {\r\n            // Mantener datos en caso de error\r\n            request.setAttribute(\"error\", e.getMessage());\r\n            request.setAttribute(\"cedula\", request.getParameter(\"cedula\"));\r\n            request.setAttribute(\"correo\", request.getParameter(\"correo\"));\r\n            request.setAttribute(\"primerNombre\", request.getParameter(\"primerNombre\"));\r\n            request.setAttribute(\"segundoNombre\", request.getParameter(\"segundoNombre\"));\r\n            request.setAttribute(\"primerApellido\", request.getParameter(\"primerApellido\"));\r\n            request.setAttribute(\"segundoApellido\", request.getParameter(\"segundoApellido\"));\r\n            request.setAttribute(\"login\", request.getParameter(\"login\"));\r\n            request.setAttribute(\"tipoUsuarioSeleccionado\", request.getParameter(\"tipoUsuario\"));\r\n            request.setAttribute(\"centroSaludSeleccionado\", request.getParameter(\"centroSalud\"));\r\n\r\n            // Recargar listas\r\n            List<Tipo_usuario> tiposUsuario = tipoUsuarioDao.listar();\r\n            List<Centro_salud> centrosSalud = centroSaludDao.listar();\r\n            request.setAttribute(\"tiposUsuario\", tiposUsuario);\r\n            request.setAttribute(\"centrosSalud\", centrosSalud);\r\n\r\n            acceso = registro;\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Verificar correo electrónico -->\r\n    private void verificarCorreo(HttpServletRequest request, HttpServletResponse response)\r\n            throws ServletException, IOException {\r\n\r\n        String correo = request.getParameter(\"correo\");\r\n\r\n        if (correo == null || correo.trim().isEmpty()) {\r\n            request.setAttribute(\"error\", \"Por favor ingrese un correo electrónico\");\r\n            acceso = verificar_correo;\r\n            return;\r\n        }\r\n\r\n        // Verificar que el correo existe en la base de datos\r\n        if (!usuariosDao.existeUsuario(\"\", \"\", correo)) {\r\n            request.setAttribute(\"error\", \"El correo electrónico no está registrado en el sistema\");\r\n            acceso = verificar_correo;\r\n            return;\r\n        }\r\n\r\n        // Enviar código de verificación\r\n        if (usuariosDao.verificarCorreoAutentico(correo)) {\r\n            request.setAttribute(\"exito\", \"Se ha enviado un código de verificación a su correo electrónico\");\r\n            request.setAttribute(\"correo\", correo);\r\n            request.setAttribute(\"mostrarCodigo\", true);\r\n        } else {\r\n            request.setAttribute(\"error\", \"Error al enviar el código de verificación. Intente nuevamente.\");\r\n        }\r\n\r\n        acceso = verificar_correo;\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Confirmar código de verificación -->\r\n    private void confirmarCodigoVerificacion(HttpServletRequest request, HttpServletResponse response)\r\n            throws ServletException, IOException {\r\n\r\n        String correo = request.getParameter(\"correo\");\r\n        String codigo = request.getParameter(\"codigo\");\r\n\r\n        if (correo == null || correo.trim().isEmpty() || codigo == null || codigo.trim().isEmpty()) {\r\n            request.setAttribute(\"error\", \"Por favor complete todos los campos\");\r\n            request.setAttribute(\"correo\", correo);\r\n            request.setAttribute(\"mostrarCodigo\", true);\r\n            acceso = verificar_correo;\r\n            return;\r\n        }\r\n\r\n        if (usuariosDao.verificarCodigoVerificacion(correo, codigo)) {\r\n            // Código válido - redirigir a página de cambio de contraseña\r\n            HttpSession session = request.getSession(true);\r\n            session.setAttribute(\"correoVerificado\", correo);\r\n            response.sendRedirect(\"cambiar_contrasena.jsp\"); // Crear esta página\r\n        } else {\r\n            request.setAttribute(\"error\", \"Código de verificación inválido o expirado\");\r\n            request.setAttribute(\"correo\", correo);\r\n            request.setAttribute(\"mostrarCodigo\", true);\r\n            acceso = verificar_correo;\r\n        }\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Desbloquear usuario (solo administradores) -->\r\n    private void desbloquearUsuario(HttpServletRequest request, HttpServletResponse response)\r\n            throws ServletException, IOException {\r\n\r\n        // Verificar que el usuario actual es administrador\r\n        HttpSession session = request.getSession(false);\r\n        if (session == null || session.getAttribute(\"usuario\") == null) {\r\n            response.sendRedirect(\"Controlador?action=login\");\r\n            return;\r\n        }\r\n\r\n        Usuarios usuarioActual = (Usuarios) session.getAttribute(\"usuario\");\r\n        if (usuarioActual.getIdTipoUsuario() != 1) { // No es administrador\r\n            request.setAttribute(\"error\", \"No tiene permisos para realizar esta acción\");\r\n            response.sendRedirect(\"Controlador?action=dashboard\");\r\n            return;\r\n        }\r\n\r\n        String loginDesbloquear = request.getParameter(\"login\");\r\n        if (loginDesbloquear == null || loginDesbloquear.trim().isEmpty()) {\r\n            request.setAttribute(\"error\", \"Debe especificar el usuario a desbloquear\");\r\n            response.sendRedirect(\"Controlador?action=dashboard_administrador\");\r\n            return;\r\n        }\r\n\r\n        if (usuariosDao.desbloquearUsuario(loginDesbloquear)) {\r\n            request.setAttribute(\"exito\", \"Usuario \" + loginDesbloquear + \" desbloqueado exitosamente\");\r\n        } else {\r\n            request.setAttribute(\"error\", \"Error al desbloquear el usuario\");\r\n        }\r\n\r\n        response.sendRedirect(\"Controlador?action=dashboard_administrador\");\r\n    }\r\n\r\n    // <!-- MÉTODO NUEVO: Cambiar Contraseña -->\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PROTOTIPO_VACUKIDS/src/main/java/Controller/Controlador.java b/PROTOTIPO_VACUKIDS/src/main/java/Controller/Controlador.java
+--- a/PROTOTIPO_VACUKIDS/src/main/java/Controller/Controlador.java	(revision a6146586065b123aed0b2a9f6ab2f49b387e3e42)
++++ b/PROTOTIPO_VACUKIDS/src/main/java/Controller/Controlador.java	(date 1754877547160)
+@@ -362,15 +362,56 @@
+ 
+         String login = request.getParameter("login");
+         String contrasena = request.getParameter("contrasena");
++        String recaptchaResponse = request.getParameter("g-recaptcha-response"); // 🆕 NUEVA LÍNEA
+ 
++        // Validar campos obligatorios
+         if (login == null || login.trim().isEmpty() ||
+                 contrasena == null || contrasena.trim().isEmpty()) {
++
++            // 🆕 NUEVO: Para peticiones AJAX, devolver JSON
++            if (isAjaxRequest(request)) {
++                response.setContentType("application/json");
++                response.setCharacterEncoding("UTF-8");
++                response.getWriter().write("{\"success\": false, \"message\": \"Por favor complete todos los campos\"}");
++                return;
++            }
++
+             request.setAttribute("error", "Por favor complete todos los campos");
+             request.setAttribute("login", login);
+             acceso = this.login;
+             return;
+         }
+ 
++        // Validar reCAPTCHA
++        if (recaptchaResponse == null || recaptchaResponse.trim().isEmpty()) {
++            if (isAjaxRequest(request)) {
++                response.setContentType("application/json");
++                response.setCharacterEncoding("UTF-8");
++                response.getWriter().write("{\"success\": false, \"message\": \"Por favor complete el reCAPTCHA\"}");
++                return;
++            }
++
++            request.setAttribute("error", "Por favor complete el reCAPTCHA");
++            request.setAttribute("login", login);
++            acceso = this.login;
++            return;
++        }
++
++        // Verificar reCAPTCHA con Google
++        if (!verificarRecaptcha(recaptchaResponse)) {
++            if (isAjaxRequest(request)) {
++                response.setContentType("application/json");
++                response.setCharacterEncoding("UTF-8");
++                response.getWriter().write("{\"success\": false, \"message\": \"reCAPTCHA inválido. Intente nuevamente.\"}");
++                return;
++            }
++
++            request.setAttribute("error", "reCAPTCHA inválido. Intente nuevamente.");
++            request.setAttribute("login", login);
++            acceso = this.login;
++            return;
++        }
++
+         // Verificar si el usuario está bloqueado
+         if (usuariosDao.usuarioBloqueado(login)) {
+             request.setAttribute("error", "Su cuenta ha sido bloqueada por múltiples intentos fallidos. Contacte al administrador.");
+@@ -385,6 +426,7 @@
+         Usuarios usuario = usuariosDao.validarUsuario(login, contrasena);
+ 
+         if (usuario != null && usuario.getIdUser() > 0) {
++            usuariosDao.resetearIntentosFallidos(login); // 🆕 NUEVA LÍNEA
+             // Login exitoso
+             HttpSession session = request.getSession(true);
+             session.setAttribute("usuario", usuario);
+@@ -417,7 +459,12 @@
+                     redirectUrl = "Controlador?action=dashboard_usuario";
+                     break;
+             }
+-
++            if (isAjaxRequest(request)) {
++                response.setContentType("application/json");
++                response.setCharacterEncoding("UTF-8");
++                response.getWriter().write("{\"success\": true, \"message\": \"Login exitoso\", \"redirectUrl\": \"" + redirectUrl + "\"}");
++                return;
++            }
+             response.sendRedirect(redirectUrl);
+         } else {
+             // Credenciales incorrectas - AQUÍ incrementamos los intentos
+@@ -434,6 +481,13 @@
+                 mensaje += ". Le quedan " + intentosRestantes + " intento(s) antes de que su cuenta sea bloqueada.";
+             }
+ 
++            if (isAjaxRequest(request)) {
++                response.setContentType("application/json");
++                response.setCharacterEncoding("UTF-8");
++                response.getWriter().write("{\"success\": false, \"message\": \"" + mensaje + "\"}");
++                return;
++            }
++
+             request.setAttribute("error", mensaje);
+             request.setAttribute("login", login);
+             acceso = this.login;
+@@ -628,7 +682,60 @@
+         response.sendRedirect("Controlador?action=dashboard_administrador");
+     }
+ 
+-    // <!-- MÉTODO NUEVO: Cambiar Contraseña -->
++    // Método auxiliar para detectar peticiones AJAX
++    private boolean isAjaxRequest(HttpServletRequest request) {
++        String xRequestedWith = request.getHeader("X-Requested-With");
++        return "XMLHttpRequest".equals(xRequestedWith) ||
++                request.getContentType() != null && request.getContentType().contains("application/json") ||
++                "application/json".equals(request.getHeader("Accept"));
++    }
++
++    // Método para verificar reCAPTCHA con Google
++    private boolean verificarRecaptcha(String recaptchaResponse) {
++        try {
++            String secretKey = "6LfhX6ArAAAAABFath9LB7DoFETFZSblU17_xtHE"; // Reemplaza con tu clave secreta
++            String url = "https://www.google.com/recaptcha/api/siteverify";
++
++            // Crear conexión HTTP
++            java.net.URL obj = new java.net.URL(url);
++            java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj.openConnection();
++
++            // Configurar POST
++            con.setRequestMethod("POST");
++            con.setDoOutput(true);
++
++            // Parámetros
++            String postParams = "secret=" + secretKey + "&response=" + recaptchaResponse;
++
++            // Enviar petición
++            try (java.io.DataOutputStream wr = new java.io.DataOutputStream(con.getOutputStream())) {
++                wr.writeBytes(postParams);
++                wr.flush();
++            }
++
++            // Leer respuesta
++            int responseCode = con.getResponseCode();
++            if (responseCode == 200) {
++                try (java.io.BufferedReader in = new java.io.BufferedReader(
++                        new java.io.InputStreamReader(con.getInputStream()))) {
++                    String inputLine;
++                    StringBuilder response = new StringBuilder();
++                    while ((inputLine = in.readLine()) != null) {
++                        response.append(inputLine);
++                    }
++
++                    // Parsear JSON simple (buscar "success":true)
++                    return response.toString().contains("\"success\": true") ||
++                            response.toString().contains("\"success\":true");
++                }
++            }
+ 
++            return false;
++
++        } catch (Exception e) {
++            System.err.println("Error verificando reCAPTCHA: " + e.getMessage());
++            return false;
++        }
++    }
++}
+ 
+-}
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1754781570487)
++++ b/.idea/vcs.xml	(date 1754781570487)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1754781594531)
++++ b/.idea/misc.xml	(date 1754781594531)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/PROTOTIPO_VACUKIDS/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1754781572313)
++++ b/.idea/.gitignore	(date 1754781572313)
+@@ -0,0 +1,10 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Environment-dependent path to Maven home directory
++/mavenHomeManager.xml
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	(date 1754781594523)
++++ b/.idea/compiler.xml	(date 1754781594523)
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <annotationProcessing>
++      <profile name="Maven default annotation processors profile" enabled="true">
++        <sourceOutputDir name="target/generated-sources/annotations" />
++        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
++        <outputRelativeToContentRoot value="true" />
++        <module name="PROYECTO" />
++      </profile>
++    </annotationProcessing>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	(date 1754781594540)
++++ b/.idea/jarRepositories.xml	(date 1754781594540)
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Central Repository" />
++      <option name="url" value="https://repo.maven.apache.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+new file mode 100644
+--- /dev/null	(date 1754781594535)
++++ b/.idea/encodings.xml	(date 1754781594535)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/PROTOTIPO_VACUKIDS/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/PROTOTIPO_VACUKIDS/src/main/resources" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: PROTOTIPO_VACUKIDS/src/main/java/Config/Conexion.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Config;\r\nimport java.sql.Connection;\r\nimport java.sql.DriverManager;\r\n\r\npublic class Conexion {\r\n    Connection con;\r\n    public Conexion() {\r\n        try {\r\n            Class.forName(\"com.mysql.cj.jdbc.Driver\");\r\n            con = DriverManager.getConnection(\"jdbc:mysql://localhost:3306/vacukidsv?useSSL=false\", \"root\", \"Josue.DB25\");\r\n        } catch (Exception e) {\r\n            System.err.println(\"Error al conectar a la base de datos: \" + e.toString());\r\n        }\r\n    }\r\n    public Connection getCon() {\r\n        return con;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PROTOTIPO_VACUKIDS/src/main/java/Config/Conexion.java b/PROTOTIPO_VACUKIDS/src/main/java/Config/Conexion.java
+--- a/PROTOTIPO_VACUKIDS/src/main/java/Config/Conexion.java	(revision a6146586065b123aed0b2a9f6ab2f49b387e3e42)
++++ b/PROTOTIPO_VACUKIDS/src/main/java/Config/Conexion.java	(date 1754782617406)
+@@ -7,7 +7,7 @@
+     public Conexion() {
+         try {
+             Class.forName("com.mysql.cj.jdbc.Driver");
+-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vacukidsv?useSSL=false", "root", "Josue.DB25");
++            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vacukidsv?useSSL=false", "root", "Jac171225.");
+         } catch (Exception e) {
+             System.err.println("Error al conectar a la base de datos: " + e.toString());
+         }
+Index: PROTOTIPO_VACUKIDS/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>com.example</groupId>\r\n    <artifactId>PROYECTO</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n    <name>PROYECTO</name>\r\n    <packaging>war</packaging>\r\n\r\n    <properties>\r\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\r\n        <maven.compiler.target>1.8</maven.compiler.target>\r\n        <maven.compiler.source>1.8</maven.compiler.source>\r\n        <junit.version>5.9.2</junit.version>\r\n    </properties>\r\n\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>javax</groupId>\r\n            <artifactId>javaee-api</artifactId>\r\n            <version>8.0.1</version>\r\n            <scope>provided</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.junit.jupiter</groupId>\r\n            <artifactId>junit-jupiter-api</artifactId>\r\n            <version>${junit.version}</version>\r\n            <scope>test</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.junit.jupiter</groupId>\r\n            <artifactId>junit-jupiter-engine</artifactId>\r\n            <version>${junit.version}</version>\r\n            <scope>test</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.apache.maven.plugins</groupId>\r\n                <artifactId>maven-war-plugin</artifactId>\r\n                <version>3.3.2</version>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PROTOTIPO_VACUKIDS/pom.xml b/PROTOTIPO_VACUKIDS/pom.xml
+--- a/PROTOTIPO_VACUKIDS/pom.xml	(revision a6146586065b123aed0b2a9f6ab2f49b387e3e42)
++++ b/PROTOTIPO_VACUKIDS/pom.xml	(date 1754785162456)
+@@ -36,6 +36,18 @@
+             <version>${junit.version}</version>
+             <scope>test</scope>
+         </dependency>
++        <dependency>
++            <groupId>com.google.code.gson</groupId>
++            <artifactId>gson</artifactId>
++            <version>2.10.1</version>
++        </dependency>
++
++        <!-- HTTP Client para hacer requests a Google (opcional, mejora el código) -->
++        <dependency>
++            <groupId>org.apache.httpcomponents</groupId>
++            <artifactId>httpclient</artifactId>
++            <version>4.5.14</version>
++        </dependency>
+     </dependencies>
+ 
+     <build>
+Index: PROTOTIPO_VACUKIDS/src/main/java/com/example/proyecto/Recapcha/RecaptchaValidador.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PROTOTIPO_VACUKIDS/src/main/java/com/example/proyecto/Recapcha/RecaptchaValidador.java b/PROTOTIPO_VACUKIDS/src/main/java/com/example/proyecto/Recapcha/RecaptchaValidador.java
+new file mode 100644
+--- /dev/null	(date 1754785657392)
++++ b/PROTOTIPO_VACUKIDS/src/main/java/com/example/proyecto/Recapcha/RecaptchaValidador.java	(date 1754785657392)
+@@ -0,0 +1,106 @@
++package com.example.proyecto.Recapcha;
++import com.google.gson.JsonObject;
++import com.google.gson.JsonParser;
++
++import java.io.BufferedReader;
++import java.io.InputStreamReader;
++import java.io.OutputStream;
++import java.net.URL;
++import javax.net.ssl.HttpsURLConnection;
++public class RecaptchaValidador {
++    private static final String RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
++
++    // ⚠️ IMPORTANTE: Reemplaza con tu SECRET KEY real
++    // ¡NUNCA subas esta clave a repositorios públicos!
++    private static final String SECRET_KEY = "6LfhX6ArAAAAABFath9LB7DoFETFZSblU17_xtHE";
++
++    /**
++     * Valida el token de reCAPTCHA con los servidores de Google
++     *
++     * @param recaptchaResponse Token recibido del cliente
++     * @return true si la validación es exitosa, false en caso contrario
++     */
++    public static boolean validateRecaptcha(String recaptchaResponse) {
++        // Validar que el token no esté vacío
++        if (recaptchaResponse == null || recaptchaResponse.trim().isEmpty()) {
++            System.err.println("reCAPTCHA: Token vacío o nulo");
++            return false;
++        }
++
++        try {
++            System.out.println("reCAPTCHA: Iniciando validación...");
++
++            // 1. Crear la conexión HTTPS a Google
++            URL url = new URL(RECAPTCHA_VERIFY_URL);
++            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
++
++            // 2. Configurar el método y headers
++            connection.setRequestMethod("POST");
++            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
++            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
++            connection.setDoOutput(true);
++            connection.setConnectTimeout(5000); // 5 segundos timeout
++            connection.setReadTimeout(5000);
++
++            // 3. Preparar los parámetros para enviar
++            String postParams = "secret=" + SECRET_KEY + "&response=" + recaptchaResponse;
++            System.out.println("reCAPTCHA: Enviando parámetros...");
++
++            // 4. Enviar la petición
++            try (OutputStream os = connection.getOutputStream()) {
++                byte[] input = postParams.getBytes("utf-8");
++                os.write(input, 0, input.length);
++                os.flush();
++            }
++
++            // 5. Leer la respuesta
++            int responseCode = connection.getResponseCode();
++            System.out.println("reCAPTCHA: Código de respuesta: " + responseCode);
++
++            StringBuilder response = new StringBuilder();
++            try (BufferedReader br = new BufferedReader(
++                    new InputStreamReader(connection.getInputStream(), "utf-8"))) {
++                String responseLine;
++                while ((responseLine = br.readLine()) != null) {
++                    response.append(responseLine.trim());
++                }
++            }
++
++            // 6. Parsear la respuesta JSON
++            String jsonResponse = response.toString();
++            System.out.println("reCAPTCHA: Respuesta de Google: " + jsonResponse);
++
++            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
++            boolean success = jsonObject.get("success").getAsBoolean();
++
++            // 7. Verificar errores adicionales
++            if (jsonObject.has("error-codes")) {
++                System.err.println("reCAPTCHA: Errores: " + jsonObject.get("error-codes"));
++            }
++
++            // 8. Verificar el score (si usas reCAPTCHA v3)
++            if (jsonObject.has("score")) {
++                double score = jsonObject.get("score").getAsDouble();
++                System.out.println("reCAPTCHA: Score: " + score);
++            }
++
++            System.out.println("reCAPTCHA: Validación " + (success ? "EXITOSA" : "FALLIDA"));
++            return success;
++
++        } catch (Exception e) {
++            System.err.println("reCAPTCHA: Error durante la validación: " + e.getMessage());
++            e.printStackTrace();
++            return false;
++        }
++    }
++
++    /**
++     * Método para configurar la SECRET KEY dinámicamente
++     * Útil si la cargas desde un archivo de configuración
++     */
++    public static boolean validateRecaptcha(String recaptchaResponse, String secretKey) {
++        // Implementación similar pero con secretKey personalizada
++        // Por simplicidad, usar el método principal por ahora
++        return validateRecaptcha(recaptchaResponse);
++    }
++}
+Index: PROTOTIPO_VACUKIDS/src/main/java/com/example/proyecto/Recapcha/ContactServelet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PROTOTIPO_VACUKIDS/src/main/java/com/example/proyecto/Recapcha/ContactServelet.java b/PROTOTIPO_VACUKIDS/src/main/java/com/example/proyecto/Recapcha/ContactServelet.java
+new file mode 100644
+--- /dev/null	(date 1754785923966)
++++ b/PROTOTIPO_VACUKIDS/src/main/java/com/example/proyecto/Recapcha/ContactServelet.java	(date 1754785923966)
+@@ -0,0 +1,168 @@
++package com.example.proyecto.Recapcha;
++import com.example.proyecto.Recapcha.RecaptchaValidador;
++
++import javax.servlet.ServletException;
++import javax.servlet.annotation.WebServlet;
++import javax.servlet.http.HttpServlet;
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++import java.io.IOException;
++import java.io.PrintWriter;
++
++@WebServlet(name = "ContactServlet", urlPatterns = {"/contact"})
++public class ContactServelet extends HttpServlet{
++    @Override
++    protected void doPost(HttpServletRequest request, HttpServletResponse response)
++            throws ServletException, IOException {
++
++        // Configurar la respuesta como JSON
++        response.setContentType("application/json");
++        response.setCharacterEncoding("UTF-8");
++
++        // Para debugging
++        System.out.println("ContactServlet: Recibiendo petición POST");
++
++        try (PrintWriter out = response.getWriter()) {
++
++            // 1. Obtener parámetros del formulario
++            String name = request.getParameter("name");
++            String email = request.getParameter("email");
++            String message = request.getParameter("message");
++            String recaptchaResponse = request.getParameter("g-recaptcha-response");
++
++            // Debug: Mostrar parámetros recibidos
++            System.out.println("Parámetros recibidos:");
++            System.out.println("- Nombre: " + name);
++            System.out.println("- Email: " + email);
++            System.out.println("- Mensaje: " + message);
++            System.out.println("- reCAPTCHA token: " + (recaptchaResponse != null ? "Presente" : "Ausente"));
++
++            // 2. Validar campos básicos
++            if (name == null || name.trim().isEmpty()) {
++                sendErrorResponse(response, out, 400, "El nombre es obligatorio");
++                return;
++            }
++
++            if (email == null || email.trim().isEmpty()) {
++                sendErrorResponse(response, out, 400, "El email es obligatorio");
++                return;
++            }
++
++            if (message == null || message.trim().isEmpty()) {
++                sendErrorResponse(response, out, 400, "El mensaje es obligatorio");
++                return;
++            }
++
++            // 3. Validar formato de email (básico)
++            if (!isValidEmail(email)) {
++                sendErrorResponse(response, out, 400, "El formato del email no es válido");
++                return;
++            }
++
++            // 4. Validar reCAPTCHA
++            System.out.println("Validando reCAPTCHA...");
++            if (!RecaptchaValidador.validateRecaptcha(recaptchaResponse)) {
++                sendErrorResponse(response, out, 400,
++                        "Verificación reCAPTCHA fallida. Por favor, inténtelo de nuevo.");
++                return;
++            }
++
++            // 5. Procesar el formulario
++            System.out.println("reCAPTCHA válido. Procesando formulario...");
++            boolean processed = processContactForm(name.trim(), email.trim(), message.trim());
++
++            // 6. Enviar respuesta
++            if (processed) {
++                System.out.println("Formulario procesado exitosamente");
++                response.setStatus(200);
++                out.println("{\"success\": true, \"message\": \"¡Mensaje enviado exitosamente!\"}");
++            } else {
++                System.err.println("Error procesando el formulario");
++                sendErrorResponse(response, out, 500, "Error interno del servidor");
++            }
++
++        } catch (Exception e) {
++            System.err.println("Error en ContactServlet: " + e.getMessage());
++            e.printStackTrace();
++
++            response.setStatus(500);
++            try (PrintWriter out = response.getWriter()) {
++                out.println("{\"success\": false, \"error\": \"Error procesando la solicitud\"}");
++            }
++        }
++    }
++
++    /**
++     * Procesa el formulario de contacto
++     * Aquí implementas tu lógica específica
++     */
++    private boolean processContactForm(String name, String email, String message) {
++        try {
++            System.out.println("=== PROCESANDO CONTACTO ===");
++            System.out.println("Nombre: " + name);
++            System.out.println("Email: " + email);
++            System.out.println("Mensaje: " + message);
++            System.out.println("Timestamp: " + new java.util.Date());
++
++            // AQUÍ IMPLEMENTAS TU LÓGICA:
++            // - Guardar en base de datos
++            // - Enviar email
++            // - Registrar en logs
++            // - Etc.
++
++            // Ejemplo: Guardar en base de datos
++            // ContactDAO dao = new ContactDAO();
++            // Contact contact = new Contact(name, email, message);
++            // dao.save(contact);
++
++            // Ejemplo: Enviar email
++            // EmailService.sendContactNotification(name, email, message);
++
++            // Simular procesamiento
++            Thread.sleep(500);
++
++            System.out.println("=== CONTACTO PROCESADO EXITOSAMENTE ===");
++            return true;
++
++        } catch (Exception e) {
++            System.err.println("Error procesando contacto: " + e.getMessage());
++            e.printStackTrace();
++            return false;
++        }
++    }
++
++    /**
++     * Validación básica de email
++     */
++    private boolean isValidEmail(String email) {
++        return email != null &&
++                email.contains("@") &&
++                email.contains(".") &&
++                email.length() > 5;
++    }
++
++    /**
++     * Envía una respuesta de error JSON
++     */
++    private void sendErrorResponse(HttpServletResponse response, PrintWriter out,
++                                   int statusCode, String errorMessage) {
++        response.setStatus(statusCode);
++        out.println("{\"success\": false, \"error\": \"" + errorMessage + "\"}");
++        System.err.println("Error response: " + errorMessage);
++    }
++
++    @Override
++    protected void doGet(HttpServletRequest request, HttpServletResponse response)
++            throws ServletException, IOException {
++
++        // Redirigir GET requests o mostrar información
++        response.setContentType("text/html");
++        try (PrintWriter out = response.getWriter()) {
++            out.println("<html><body>");
++            out.println("<h2>Contact Servlet</h2>");
++            out.println("<p>Este servlet maneja formularios POST con reCAPTCHA.</p>");
++            out.println("<p>Para probar, usa el formulario HTML.</p>");
++            out.println("</body></html>");
++        }
++    }
++}
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1754781570475)
++++ b/.idea/modules.xml	(date 1754781570475)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/P_INTEGRADOR_PROTOTIPO.iml" filepath="$PROJECT_DIR$/.idea/P_INTEGRADOR_PROTOTIPO.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/P_INTEGRADOR_PROTOTIPO.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/P_INTEGRADOR_PROTOTIPO.iml b/.idea/P_INTEGRADOR_PROTOTIPO.iml
+new file mode 100644
+--- /dev/null	(date 1754781570467)
++++ b/.idea/P_INTEGRADOR_PROTOTIPO.iml	(date 1754781570467)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
