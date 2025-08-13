@@ -16,7 +16,7 @@
 <body>
 <!-- Acceso rápido a centros -->
 <div class="floating-access">
-    <a href="Controlador?action=listar_centros" class="tooltip floating-btn" data-tooltip="Ver Centros de Vacunación">
+    <a href="CentroSaludController?action=listar_centros" class="tooltip floating-btn" data-tooltip="Ver Centros de Vacunación">
         <i class="fas fa-map-marker-alt"></i>
     </a>
 </div>
@@ -31,11 +31,11 @@
     </div>
 
     <nav class="nav-wrapper">
-        <a href="Controlador?action=mostrar_registro" class="nav-link nav-link-enhanced tooltip" data-tooltip="Crear nueva cuenta">
+        <a href="UserController?action=mostrar_registro" class="nav-link nav-link-enhanced tooltip" data-tooltip="Crear nueva cuenta">
             <i class="fas fa-user-plus"></i>
             Registrarse
         </a>
-        <a href="Controlador?action=login" class="nav-link nav-link-enhanced tooltip" data-tooltip="Acceder a tu cuenta">
+        <a href="AuthController?action=login" class="nav-link nav-link-enhanced tooltip" data-tooltip="Acceder a tu cuenta">
             <i class="fas fa-sign-in-alt"></i>
             Iniciar Sesión
         </a>
@@ -63,11 +63,11 @@
             <div class="hero__divider"></div>
 
             <div class="hero__actions">
-                <a href="Controlador?action=login" class="btn btn--primary btn-enhanced pulse-effect">
+                <a href="AuthController?action=login" class="btn btn--primary btn-enhanced pulse-effect">
                     <i class="fas fa-sign-in-alt"></i>
                     Iniciar sesión
                 </a>
-                <a href="Controlador?action=mostrar_registro" class="btn btn--secondary btn-enhanced">
+                <a href="UserController?action=mostrar_registro" class="btn btn--secondary btn-enhanced">
                     <i class="fas fa-user-plus"></i>
                     ¿Eres nuevo? Regístrate
                 </a>

@@ -49,8 +49,8 @@
 
         <div class="login__title">Bienvenido/a</div>
 
-        <!-- FORMULARIO CORREGIDO: Agregado method="post" y action="Controlador" -->
-        <form class="form" method="post" action="Controlador">
+        <!-- FORMULARIO CORREGIDO: Agregado method="post" y action="AuthControlador" -->
+        <form class="form" method="post" action="AuthController">
             <input type="hidden" name="action" value="validar_login">
 
             <!-- Campo de usuario -->
@@ -88,12 +88,12 @@
 
         <div class="actions">
             <!-- Botón "Recordarme" eliminado -->
-            <a href="Controlador?action=mostrar_verificar_correo" class="actions__button">¿Olvidaste tu contraseña?</a>
+            <a href="PasswordRecoveryController?action=mostrar_verificar_correo" class="actions__button">¿Olvidaste tu contraseña?</a>
         </div>
 
         <div class="register">
             <p>¿No tienes cuenta?
-                <a href="Controlador?action=mostrar_registro" class="register__link">Regístrate aquí</a>
+                <a href="UserController?action=mostrar_registro" class="register__link">Regístrate aquí</a>
             </p>
         </div>
     </div>

@@ -11,7 +11,7 @@
     String nombreCompleto = (String) session.getAttribute("nombreCompleto");
 
     if (usuario == null) {
-        response.sendRedirect("Controlador?action=login");
+        response.sendRedirect("AuthController?action=login");
         return;
     }
 
@@ -67,7 +67,7 @@
                 <div style="padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 12px; color: #666;">
                     <%= nombreCompleto %>
                 </div>
-                <a href="Controlador?action=logout">Cerrar sesión</a>
+                <a href="AuthController?action=logout">Cerrar sesión</a>
             </div>
         </div>
     </nav>

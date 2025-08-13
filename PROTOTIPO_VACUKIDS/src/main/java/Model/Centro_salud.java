@@ -5,14 +5,16 @@ public class Centro_salud {
     private String nombreCentroSalud;
     private double latitud;
     private double longitud;
+    private String estado;
 
     public Centro_salud() {
     }
      //No se coloca el idCentroSalud en el constructor
-    public Centro_salud(String nombreCentroSalud, double latitud, double longitud) {
+    public Centro_salud(String nombreCentroSalud, double latitud, double longitud, String estado) {
         this.nombreCentroSalud = nombreCentroSalud;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.estado = estado;
     }
 
     //Getters y Setters
@@ -46,6 +48,13 @@ public class Centro_salud {
     }
     public void setLongitud(double longitud) {
         this.longitud = longitud;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public String getEstado() {
+        return estado;
     }
 }
 

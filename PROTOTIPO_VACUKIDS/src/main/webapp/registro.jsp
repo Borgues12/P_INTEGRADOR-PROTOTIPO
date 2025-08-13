@@ -135,7 +135,7 @@
         </div>
 
         <!-- FORMULARIO DE REGISTRO -->
-        <form class="form registro-form" method="post" action="Controlador" id="formRegistro">
+        <form class="form registro-form" method="post" action="UserController" id="formRegistro">
             <input type="hidden" name="action" value="registrar_usuario">
 
             <!-- Información Personal -->
@@ -376,7 +376,7 @@
                     Crear Cuenta
                 </button>
 
-                <a href="Controlador?action=login" class="form__button form__button--secondary">
+                <a href="AuthController?action=login" class="form__button form__button--secondary">
                     <i class="fas fa-arrow-left"></i>
                     Volver al Login
                 </a>

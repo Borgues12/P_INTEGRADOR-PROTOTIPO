@@ -54,7 +54,7 @@
             String correoVerificado = (String) session.getAttribute("correoVerificado");
             if (correoVerificado == null || correoVerificado.isEmpty()) {
                 // Si no hay correo verificado en sesión, redirigir al inicio del flujo
-                response.sendRedirect("Controlador?action=mostrar_verificar_correo");
+                response.sendRedirect("PasswordRecoveryController?action=mostrar_verificar_correo");
                 return;
             }
         %>
